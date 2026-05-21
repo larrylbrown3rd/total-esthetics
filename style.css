@@ -1,0 +1,323 @@
+/* ===================== RESET ===================== */
+/* * = universal selector — targets every element on the page */
+* {
+  margin: 0;               /* removes default browser margins */
+  padding: 0;              /* removes default browser padding */
+  box-sizing: border-box;  /* padding included in width — not added to it */
+}
+
+/* ===================== VARIABLES ===================== */
+/* :root = top of document — variables available everywhere in CSS */
+:root {
+  --black: #0A0A0A;  /* page background — almost pure black */
+  --deep: #111111;   /* cards and sections — slightly lighter than black */
+  --gold: #C9A96E;   /* accents, buttons, hover states */
+  --mink: #3D2B1F;   /* subtle borders and dividers — dark brown */
+  --cream: #F5F0E8;  /* all body text — warm off-white */
+}
+
+/* ===================== BODY ===================== */
+body {
+  background-color: var(--black); /* page background — uses --black variable */
+  color: var(--cream);            /* default text color for entire page */
+  font-family: sans-serif;        /* basic font — upgrading to Google Fonts Week 2 */
+}
+
+/* ===================== HEADER ===================== */
+header {
+  position: sticky;               /* stays at top of screen when user scrolls */
+  top: 0;                         /* locks it to the very top of the viewport */
+  z-index: 100;                   /* keeps nav on top of all other content */
+  background-color: var(--black); /* matches page background — seamless look */
+  padding: 20px 40px;             /* 20px top/bottom · 40px left/right */
+}
+
+/* ===================== NAV ===================== */
+nav {
+  display: flex;                  /* turns nav into a flex container */
+  justify-content: space-between; /* logo left · links right */
+  align-items: center;            /* vertically centers logo and links */
+}
+
+/* ===================== LOGO ===================== */
+.logo {
+  font-family: sans-serif;  /* font for brand name */
+  font-size: 20px;          /* size of logo text */
+  color: var(--cream);      /* cream colored text */
+  text-decoration: none;    /* removes default underline on anchor tag */
+  letter-spacing: 0.1em;    /* spreads letters slightly — luxury feel */
+}
+
+/* ===================== NAV LINKS LIST ===================== */
+ul {
+  list-style: none; /* removes default bullet points */
+  display: flex;    /* lines up all li items in a row */
+  gap: 32px;        /* spacing between each nav link */
+}
+
+/* ===================== NAV LINK STYLE ===================== */
+ul a {
+  color: var(--cream);                  /* cream text on all nav links */
+  text-decoration: none;                /* removes default underline */
+  font-size: 14px;                      /* slightly smaller than logo */
+  padding-bottom: 4px;                  /* space between text and underline */
+  border-bottom: 1px solid transparent; /* invisible border — prevents layout shift on hover */
+  transition: all 0.3s ease;            /* animates hover smoothly — not instant snap */
+}
+
+/* ===================== NAV LINK HOVER ===================== */
+ul a:hover {
+  color: var(--gold);                   /* text turns gold on hover */
+  border-bottom: 1px solid var(--gold); /* gold underline appears on hover */
+}
+
+/* ===================== BOOK NOW BUTTON ===================== */
+.book-now {
+  background-color: var(--gold); /* solid gold background */
+  color: var(--black);           /* black text on gold — high contrast */
+  padding: 10px 24px;            /* 10px top/bottom · 24px left/right */
+}
+
+/* ===================== BOOK NOW HOVER ===================== */
+.book-now:hover {
+  background-color: transparent;  /* gold fill disappears on hover */
+  color: var(--gold);             /* text becomes gold */
+  border-bottom: none;            /* removes underline hover from ul a:hover */
+  outline: 1px solid var(--gold); /* gold border appears — ghost button effect */
+}
+
+/* ===================== HERO ===================== */
+.hero {
+  height: 100vh;                     /* full viewport height — fills entire screen */
+  position: relative;                /* needed so overlay + content position inside it */
+  overflow: hidden;                  /* hides anything bleeding outside the section */
+  background-image: url('hero.jpg'); /* background photo — add real image to folder later */
+  background-size: cover;            /* image covers entire section — no gaps */
+  background-position: center;       /* keeps image centered when browser resizes */
+}
+
+/* ===================== HERO OVERLAY ===================== */
+/* ::before = pseudo-element — creates overlay on top of background image */
+.hero::before {
+  content: '';                           /* required for pseudo-elements — even if empty */
+  position: absolute;                    /* sits on top of background image */
+  inset: 0;                              /* stretches to all four edges — top right bottom left */
+  background-color: rgba(0, 0, 0, 0.72); /* black at 72% opacity — deep moody overlay */
+}
+
+/* ===================== HERO CONTENT ===================== */
+.hero-content {
+  position: absolute;               /* positioned inside .hero */
+  top: 50%;                         /* moves to vertical center of hero */
+  left: 50%;                        /* moves to horizontal center of hero */
+  transform: translate(-50%, -50%); /* pulls back half its own size — perfectly centered */
+  text-align: center;               /* centers headline, subtext, and button */
+  z-index: 1;                       /* sits above the ::before overlay */
+}
+
+/* ===================== HERO HEADLINE ===================== */
+.hero-content h1 {
+  font-family: sans-serif;  /* upgrading to Cormorant Garamond Week 2 */
+  font-size: 64px;          /* large commanding headline */
+  font-weight: 300;         /* light weight — elegant not heavy */
+  color: var(--cream);      /* warm off-white text */
+  letter-spacing: 0.05em;   /* slight spacing — luxury editorial feel */
+  margin-bottom: 20px;      /* space between headline and subtext */
+}
+
+/* ===================== HERO SUBTEXT ===================== */
+.hero-content p {
+  font-size: 18px;         /* subheadline — smaller than h1 */
+  color: var(--cream);     /* matches headline color */
+  opacity: 0.8;            /* slightly faded — creates visual hierarchy below h1 */
+  margin-bottom: 40px;     /* space between subtext and CTA button */
+  letter-spacing: 0.05em;  /* matches headline letter spacing */
+}
+
+/* ===================== HERO BUTTON ===================== */
+.hero-btn {
+  display: inline-block;         /* allows padding on an anchor tag */
+  background-color: var(--gold); /* solid gold button */
+  color: var(--black);           /* black text — high contrast on gold */
+  padding: 16px 40px;            /* generous padding — premium feel */
+  text-decoration: none;         /* removes default underline on anchor tag */
+  font-size: 14px;               /* slightly smaller than body text */
+  letter-spacing: 0.15em;        /* wide spacing — luxury button style */
+  transition: all 0.3s ease;     /* smooth hover animation */
+}
+
+/* ===================== HERO BUTTON HOVER ===================== */
+.hero-btn:hover {
+  background-color: transparent;  /* gold fill disappears on hover */
+  color: var(--gold);             /* text becomes gold */
+  outline: 1px solid var(--gold); /* gold border — ghost button effect */
+}
+
+/* ===================== SERVICES ===================== */
+.services {
+  padding: 100px 40px;           /* space above and below the section */
+  background-color: var(--deep); /* slightly lighter than black — separates from hero */
+}
+
+/* ===================== SERVICES HEADING ===================== */
+.services h2 {
+  font-family: sans-serif;  /* upgrading to Cormorant Garamond Week 2 */
+  font-size: 42px;          /* large but smaller than hero h1 */
+  font-weight: 300;         /* light weight — matches hero headline style */
+  color: var(--cream);      /* warm off-white */
+  text-align: center;       /* centered above the grid */
+  letter-spacing: 0.05em;   /* slight spacing — luxury feel */
+  margin-bottom: 16px;      /* space between heading and divider line */
+}
+
+/* ===================== GOLD DIVIDER ===================== */
+.divider {
+  display: block;                /* span is inline by default — block lets us size it */
+  width: 60px;                   /* short line — elegant not full width */
+  height: 1px;                   /* thin line */
+  background-color: var(--gold); /* gold color */
+  margin: 0 auto 60px;           /* centered · 60px space below before grid starts */
+}
+
+/* ===================== SERVICES GRID ===================== */
+.services-grid {
+  display: grid;                         /* turns div into a grid container */
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns — 1fr = 1 fraction of space */
+  gap: 24px;                             /* space between each card */
+  max-width: 1100px;                     /* prevents grid from stretching too wide */
+  margin: 0 auto;                        /* centers grid on the page */
+}
+
+/* ===================== SERVICE CARD ===================== */
+.card {
+  background-color: var(--black);    /* dark card background */
+  padding: 40px 32px;                /* space inside each card */
+  border-top: 2px solid var(--gold); /* gold top border — signature detail */
+  transition: all 0.3s ease;         /* smooth hover animation */
+  cursor: pointer;                   /* shows hand cursor on hover */
+}
+
+/* ===================== CARD HOVER ===================== */
+.card:hover {
+  border: 2px solid var(--gold); /* gold border on all four sides */
+  transform: translateY(-4px);   /* card lifts up slightly on hover */
+}
+
+/* ===================== CARD TITLE ===================== */
+.card h3 {
+  font-family: sans-serif;  /* upgrading to Cormorant Garamond Week 2 */
+  font-size: 20px;          /* service name size */
+  font-weight: 400;         /* slightly heavier than headings */
+  color: var(--gold);       /* gold service name — stands out on dark card */
+  margin-bottom: 12px;      /* space between title and description */
+  letter-spacing: 0.05em;   /* slight spacing */
+}
+
+/* ===================== CARD DESCRIPTION ===================== */
+.card p {
+  font-size: 14px;     /* smaller than body text */
+  color: var(--cream); /* cream text */
+  opacity: 0.75;       /* slightly faded — secondary info */
+  line-height: 1.7;    /* generous line height — easy to read */
+  margin-bottom: 20px; /* space between description and price */
+}
+
+/* ===================== CARD PRICE ===================== */
+.card .price {
+  font-size: 13px;        /* smallest text on the card */
+  color: var(--gold);     /* gold price — matches title */
+  letter-spacing: 0.1em;  /* wide spacing — premium feel */
+}
+
+.contact {
+  padding: 100px 40px;
+  background-color: var(--black);
+}
+
+.contact h2 {
+  font-family: sans-serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--cream);
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 28px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: var(--cream);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background-color: var(--deep);
+  border: 1px solid var(--mink);
+  color: var(--cream);
+  padding: 14px 16px;
+  font-size: 14px;
+  font-family: sans-serif;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border: 1px solid var(--gold); 
+}
+
+.error{
+  font-size: 12px;
+  color: #E05252;
+  margin-top: 6px;
+  display: none;
+}
+
+.error.visible {
+  display: block;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: var(--gold);
+  color: var(--black);
+  padding: 16px;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: transparent;
+  color: var(--gold);
+  outline: 1px solid var(--gold);
+}
+
+.success-msg {
+  text-align: center;
+  color: var(--gold);
+  font-size: 14px;
+  margin-top: 24px;
+  display: none;
+}
+
+.success-msg.visible {
+  display: block;
+}

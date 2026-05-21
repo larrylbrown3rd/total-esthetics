@@ -1,0 +1,189 @@
+<!-- Tells browser this is HTML5 — without it browser goes into quirks mode -->
+<!DOCTYPE html>
+
+<!-- lang="en" tells screen readers and Google the page is in English -->
+<html lang="en">
+
+  <!-- head contains metadata the user never sees -->
+  <head>
+
+    <!-- UTF-8 handles special characters like apostrophes and accents -->
+    <meta charset="UTF-8" />
+
+    <!-- Makes site responsive on mobile — spell "initial" carefully -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Shows in browser tab + Google search headline -->
+    <title>Total Esthetics</title>
+
+    <!-- Links your CSS file — must be in head, not body -->
+    <link rel="stylesheet" href="style.css" />
+
+  </head>
+
+  <body>
+
+    <!-- header wraps the nav — sits at top of every page -->
+    <header>
+
+      <!-- nav = navigation container — Flexbox applied here -->
+      <nav>
+
+        <!-- logo = brand name on the left — href="#" links to top of page -->
+        <a href="#" class="logo">Total Esthetics</a>
+
+        <!-- ul = unordered list — holds all nav links in a row -->
+        <ul>
+
+          <!-- each li = one nav item — a tag is the clickable link -->
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Gallery</a></li>
+
+          <!-- book-now class = gold button style applied in CSS -->
+          <li><a href="#" class="book-now">Book Now</a></li>
+
+        </ul>
+      </nav>
+    </header>
+
+    <!-- hero section — full screen dark image with overlay and CTA -->
+    <section class="hero">
+
+      <!-- hero-content — centers all text and button on screen -->
+      <div class="hero-content">
+
+        <!-- main headline — large text — commanding first impression -->
+        <h1>Precision. Beauty. Confidence.</h1>
+
+        <!-- subheadline — location and service description -->
+        <p>Luxury Lash + Brow Artistry in Hapeville, GA</p>
+
+        <!-- CTA button — always lowercase a tag, not uppercase A -->
+        <a href="#" class="hero-btn">Book Your Appointment</a>
+
+      </div>
+    </section>
+
+    <!-- services section — 3 column grid of treatment cards -->
+    <section class="services">
+
+      <!-- section heading — centered above the grid -->
+      <h2>The Experience</h2>
+
+      <!-- gold divider line — styled as a block element in CSS -->
+      <span class="divider"></span>
+
+      <!-- services-grid — CSS Grid container — 3 columns -->
+      <div class="services-grid">
+
+        <!-- each card = one service — title, description, price -->
+        <div class="card">
+          <h3>Lash Lift</h3>
+          <p>A semi-permanent treatment that curls and lifts your natural lashes from the root.</p>
+          <span class="price">From $85</span>
+        </div>
+
+        <div class="card">
+          <h3>Lash Extensions</h3>
+          <p>Custom lash extensions applied one by one for a full, natural, or dramatic look.</p>
+          <span class="price">From $120</span>
+        </div>
+
+        <div class="card">
+          <h3>Brow Lamination</h3>
+          <p>Restructures brow hairs into a uniform shape for a full, fluffy, brushed-up look.</p>
+          <span class="price">From $75</span>
+        </div>
+
+        <div class="card">
+          <h3>Brow Tint</h3>
+          <p>Semi-permanent dye that defines and darkens brows to match your desired shade.</p>
+          <span class="price">From $45</span>
+        </div>
+
+        <div class="card">
+          <h3>Brow Wax</h3>
+          <p>Precise waxing that shapes and cleans up brows for a polished defined look.</p>
+          <span class="price">From $35</span>
+        </div>
+
+        <div class="card">
+          <h3>Lash + Brow Combo</h3>
+          <p>Lash lift and brow lamination together for a full eye transformation in one visit.</p>
+          <span class="price">From $145</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="contact">
+
+      <h2>Book Your Visit</h2>
+
+      <span class="divider"></span>
+
+      <form class="contact-form" action="#" novalidate>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+          type="text"
+          id="name"
+          placeholder="Your full name"
+         />
+         <span class="error" id="name-error">Please enter your full name</span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="your@email.com"
+      />
+      <span class="error" id="email-error">Please enter a valid email adress</span>
+    </div>
+
+    <div class="form-group">
+      <label for="service">Service</label>
+      <select id="service" name="service">
+        <option value="">Select a service</option>
+        <option value="lash-lift">Lash Lift - From $85</option>
+        <option value="lash-extentions">Lash Extensions - From $120</option>
+        <option value="brow-lamination">Brow Lamination - From $75</option>
+        <option value="brow-tint">Brow Tint - From $45</option>
+        <option value="brow-wax">Brow Wax - From $35</option>
+        <option value="combo">Lash + Brow Combo - From $145</option>
+      </select>
+      <span class="error" id="service-error">please select a service</span>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea
+        id="message"
+        name="message"
+        rows="5"
+        placeholder="Any questions or requests..."
+      ></textarea>
+      <span class="error" id="message-error">Please enter a message</span>
+    </div>
+
+    <button type="submit" class="submit-btn">Request Appointment</button>
+
+    <p class="success-msg" id="success-msg">
+      Thank you! We will be in touch shortly.
+    </p>
+
+    </form>
+    </section>
+
+    <!-- script goes last — loads after HTML so it doesn't block rendering -->
+    <script src="script.js"></script>
+
+  </body>
+</html>
+
+
