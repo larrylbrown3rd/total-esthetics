@@ -3,25 +3,184 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --black: #0a0a0a;
+  --deep: #111111;
+  --card: #1a1a1a;
+  --charcoal: #2c2c2c;
+  --gold: #c9a96e;
+  --gold-light: #e8d5a3;
+  --gold-dark: #b8860b;
+  --cream: #f5f0e8;
+  --muted: #8b8b7a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0a0a0a;
+  color: #f5f0e8;
+  font-family: var(--font-dm-sans), sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+html {
+  scroll-behavior: smooth;
+}
+
+/* Logo "TOTAL" only — gradient allowed here */
+.logo-total-gradient {
+  background: linear-gradient(
+    135deg,
+    #b8860b,
+    #c9a96e,
+    #e8d5a3,
+    #c9a96e,
+    #b8860b
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.thin-text {
+  color: #2c2c2c;
+  font-weight: 300;
+}
+
+.hero-section {
+  cursor: none;
+}
+
+.btn-gold {
+  display: inline-block;
+  background-color: #c9a96e;
+  background-image: none;
+  color: #0a0a0a;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  background-color: transparent;
+  background-image: none;
+  color: #c9a96e;
+  outline: 1px solid #c9a96e;
+}
+
+.btn-ghost {
+  display: inline-block;
+  background-color: transparent;
+  background-image: none;
+  color: #c9a96e;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 0;
+  outline: 1px solid #c9a96e;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  background-color: #c9a96e;
+  background-image: none;
+  color: #0a0a0a;
+  outline: none;
+}
+
+.btn-inverted {
+  display: inline-block;
+  background-color: #0a0a0a;
+  background-image: none;
+  color: #c9a96e;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-inverted:hover {
+  background-color: transparent;
+  background-image: none;
+  color: #0a0a0a;
+  outline: 1px solid #0a0a0a;
+}
+
+.gold-divider {
+  width: 120px;
+  height: 1px;
+  background-color: #c9a96e;
+  margin: 0 auto;
+}
+
+.label {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #8b8b7a;
+}
+
+.logo-total {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.logo-esthetics {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: #2c2c2c;
+  text-transform: uppercase;
+  margin-left: 0.3em;
+}
+
+.logo-tagline {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #8b8b7a;
+  text-align: center;
+  margin-top: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a96e;
+}
+
+::selection {
+  background: #c9a96e;
+  color: #0a0a0a;
 }

@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Total Esthetics
 
-## Getting Started
+Dark luxury lash + brow esthetician website — **Next.js 14** · App Router · Tailwind CSS · Framer Motion · Three.js particles.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open **http://127.0.0.1:3000**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+| Route | Description |
+|-------|-------------|
+| `/` | Home — particles hero, marquee, services, gallery, testimonials, CTA |
+| `/services` | Full services + FAQ |
+| `/gallery` | Filterable grid + lightbox |
+| `/about` | Artist bio + philosophy |
+| `/contact` | Contact form + studio info |
+| `/book` | Acuity scheduling embed |
 
-## Learn More
+## Media (`public/media/`)
 
-To learn more about Next.js, take a look at the following resources:
+| File | Type |
+|------|------|
+| `lash-brow-result-1.png` | Client photo |
+| `lash-brow-result-2.png` | Client photo |
+| `studio-reel-1.mov` | Studio reel video |
+| `studio-reel-2.mov` | Studio reel video |
+| `studio-reel-3.mov` | Studio reel video |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Videos play in the gallery lightbox and **Studio Reels** section on the home page. Best in Safari; Chrome/Firefox may need `.mp4` copies for full support.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Optional: add `public/hero.jpg` for a hero background photo.
 
-## Deploy on Vercel
+## Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Fonts:** Bodoni Moda · DM Sans
+- **Animation:** Framer Motion
+- **3D:** React Three Fiber (gold particle hero)
+- **Booking:** https://totalesthetics.as.me/schedule/d6a31974
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Archive
+
+Previous static HTML/CSS/JS site: `_archive/static-site/`

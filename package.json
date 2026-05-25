@@ -1,22 +1,27 @@
 {
-  "name": "total-tranquility",
-  "version": "0.1.0",
+  "name": "total-esthetics",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 127.0.0.1 --port 3000",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start --hostname 127.0.0.1 --port 3000",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.35"
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "framer-motion": "^11.18.2",
+    "next": "16.2.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.160.1"
   },
   "devDependencies": {
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.35"
+    "autoprefixer": "^10.4.20",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
   }
 }
