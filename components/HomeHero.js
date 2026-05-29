@@ -9,13 +9,13 @@ import { BRAND_TAGLINE } from '@/lib/data';
 export default function HomeHero() {
   return (
     <section
-      className="hero-section relative min-h-screen overflow-hidden bg-black-luxury bg-cover bg-center bg-no-repeat transform-gpu backface-hidden will-change-transform"
+      className="hero-section relative min-h-screen overflow-hidden bg-black-luxury bg-cover bg-center bg-no-repeat md:transform-gpu md:backface-hidden"
       style={{ backgroundImage: `url('${heroBackground.image}')` }}
     >
       <HeroVideoBackground />
-      <div className="absolute inset-0 z-[1] transform-gpu backface-hidden will-change-transform bg-[#0A0A0A]/58 md:bg-gradient-to-r md:from-[#0A0A0A]/92 md:via-[#0A0A0A]/60 md:to-transparent" />
+      <div className="absolute inset-0 z-[1] bg-[#0A0A0A]/58 md:bg-gradient-to-r md:from-[#0A0A0A]/92 md:via-[#0A0A0A]/60 md:to-transparent" />
 
-      <div className="relative z-[2] mx-auto flex min-h-screen w-full items-center justify-center px-6 py-16 transform-gpu backface-hidden will-change-transform md:py-20">
+      <div className="relative z-[2] mx-auto flex min-h-screen w-full items-center justify-center px-6 py-16 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
