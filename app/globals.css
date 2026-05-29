@@ -54,6 +54,26 @@ html {
   cursor: none;
 }
 
+@media (max-width: 767px) {
+  .hero-section {
+    cursor: auto;
+  }
+}
+
+/* Full-bleed cover for hero image/video — prevents letterboxing on iOS */
+.hero-cover-media {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  object-position: center;
+}
+
 .btn-gold {
   display: inline-block;
   background-color: #c9a96e;
