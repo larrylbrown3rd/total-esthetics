@@ -12,7 +12,7 @@ const navLinks = [
   { href: '/gallery', label: 'GALLERY' },
   { href: '/about', label: 'ABOUT' },
   { href: '/contact', label: 'CONTACT' },
-  { href: '/policies', label: 'POLICIES' },
+  { href: '/terms', label: 'POLICIES' },
 ];
 
 const desktopNavLinks = [
@@ -91,7 +91,11 @@ export default function Navbar() {
           : 'border-b border-transparent bg-transparent py-5 md:px-10'
       } px-6`}
     >
-      <nav className="relative mx-auto flex max-w-7xl items-center justify-between">
+      <nav
+        className={`relative mx-auto flex max-w-7xl items-center justify-between ${
+          menuOpen ? 'z-[60]' : ''
+        }`}
+      >
         <NavLogo />
 
         <button
@@ -184,7 +188,7 @@ export default function Navbar() {
                 className="mt-4 block text-center font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F0E8]/80 transition-colors duration-300 hover:text-[#C9A96E]"
                 onClick={closeMenu}
               >
-                Total Packages
+                TOTAL PACKAGES
               </Link>
             </div>
           </div>

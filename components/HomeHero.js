@@ -34,7 +34,7 @@ export default function HomeHero() {
             Precision. <span className="italic">Beauty.</span> <br /> Confidence.
           </h1>
 
-          <div className="mt-8 hidden w-full max-w-sm md:mt-8 md:block">
+          <div className="mt-8 w-full max-w-sm md:mt-8">
             <Link
               href="/book"
               className="block bg-[#C9A96E] px-8 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
@@ -45,7 +45,7 @@ export default function HomeHero() {
               href="/services"
               className="mt-4 block text-center font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F0E8]/80 transition-colors duration-300 hover:text-[#C9A96E]"
             >
-              Total Packages
+              TOTAL PACKAGES
             </Link>
           </div>
         </motion.div>
