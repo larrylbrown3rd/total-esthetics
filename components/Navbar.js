@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BRAND_TAGLINE_UPPER } from '@/lib/data';
-import { heroBackground } from '@/lib/media';
 
 const navLinks = [
   { href: '/', label: 'HOME' },
@@ -56,6 +56,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -83,90 +88,32 @@ export default function Navbar() {
     }`;
   };
 
-  return (
-    <header
-      className={`fixed top-[2px] z-50 w-full transform-gpu backface-hidden will-change-transform transition-all duration-500 ${
-        scrolled
-          ? 'border-b border-[#2C2C2C] bg-black/80 py-4 backdrop-blur-md md:px-10'
-          : 'border-b border-transparent bg-transparent py-5 md:px-10'
-      } px-6`}
-    >
-      <nav
-        className={`relative mx-auto flex max-w-7xl items-center justify-between ${
-          menuOpen ? 'z-[60]' : ''
-        }`}
-      >
-        <NavLogo />
-
-        <button
-          type="button"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-none border border-charcoal/50 bg-black/40 backdrop-blur-sm md:hidden"
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          <span
-            className={`block h-px w-5 bg-cream transition-all duration-300 ${
-              menuOpen ? 'translate-y-[7px] rotate-45' : ''
-            }`}
-          />
-          <span
-            className={`block h-px w-5 bg-cream transition-all duration-300 ${
-              menuOpen ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`block h-px w-5 bg-cream transition-all duration-300 ${
-              menuOpen ? '-translate-y-[7px] -rotate-45' : ''
-            }`}
-          />
-        </button>
-
-        <div className="hidden items-center gap-10 md:flex">
-          <ul className="flex items-center gap-8">
-            {desktopNavLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className={linkClass(link.href)}>
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/book"
-            className="rounded-none bg-[#C9A96E] px-6 py-2.5 font-sans-dm text-xs uppercase tracking-[0.25em] text-[#0A0A0A] transition-all duration-300 hover:bg-transparent hover:text-[#C9A96E] hover:outline hover:outline-1 hover:outline-[#C9A96E]"
+  const mobileMenu =
+    menuOpen && mounted
+      ? createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex h-full w-full transform-gpu flex-col items-center justify-center bg-[#0A0A0A] md:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
           >
-            Book Now
-          </Link>
-        </div>
-      </nav>
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMenuOpen(false)}
+              className="absolute right-6 top-6 z-[10000] border border-[#3D2B1F]/40 bg-[#111111] p-3 text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
+            >
+              ✕
+            </button>
 
-      {menuOpen && (
-        <div
-          className="fixed inset-0 z-40 flex flex-col overflow-y-auto transform-gpu backface-hidden will-change-transform md:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation"
-        >
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url('${heroBackground.image}')` }}
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[#0A0A0A]/58"
-          />
-
-          <div className="relative z-10 flex min-h-full flex-col items-center justify-center px-6 py-28">
-            <nav aria-label="Site navigation">
-              <ul className="space-y-4 text-center">
+            <nav aria-label="Site navigation" className="w-full max-w-sm px-6">
+              <ul className="flex flex-col items-center gap-1">
                 {navLinks.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.href} className="w-full">
                     <Link
                       href={link.href}
-                      className="block py-2 font-sans text-lg font-light uppercase tracking-[0.2em] text-[#F5F0E8]/90 transition-colors duration-300 hover:text-[#C9A96E]"
-                      onClick={closeMenu}
+                      className="block py-4 text-center font-sans text-lg font-light uppercase tracking-[0.2em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
+                      onClick={() => setMenuOpen(false)}
                     >
                       {link.label}
                     </Link>
@@ -175,25 +122,84 @@ export default function Navbar() {
               </ul>
             </nav>
 
-            <div className="mt-10 w-full max-w-xs">
+            <div className="mt-8 w-full max-w-xs px-6">
               <Link
                 href="/book"
                 className="block bg-[#C9A96E] px-8 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
-                onClick={closeMenu}
+                onClick={() => setMenuOpen(false)}
               >
                 SECURE YOUR SESSION
               </Link>
               <Link
                 href="/services"
                 className="mt-4 block text-center font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F0E8]/80 transition-colors duration-300 hover:text-[#C9A96E]"
-                onClick={closeMenu}
+                onClick={() => setMenuOpen(false)}
               >
                 TOTAL PACKAGES
               </Link>
             </div>
+          </div>,
+          document.body
+        )
+      : null;
+
+  return (
+    <>
+      <header
+        className={`fixed top-[2px] z-50 w-full transform-gpu backface-hidden will-change-transform transition-all duration-500 ${
+          scrolled
+            ? 'border-b border-[#2C2C2C] bg-black/80 py-4 backdrop-blur-md md:px-10'
+            : 'border-b border-transparent bg-transparent py-5 md:px-10'
+        } px-6`}
+      >
+        <nav className="relative mx-auto flex max-w-7xl items-center justify-between">
+          <NavLogo />
+
+          <button
+            type="button"
+            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-none border border-charcoal/50 bg-[#111111] md:hidden"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span
+              className={`block h-px w-5 bg-cream transition-all duration-300 ${
+                menuOpen ? 'translate-y-[7px] rotate-45' : ''
+              }`}
+            />
+            <span
+              className={`block h-px w-5 bg-cream transition-all duration-300 ${
+                menuOpen ? 'opacity-0' : ''
+              }`}
+            />
+            <span
+              className={`block h-px w-5 bg-cream transition-all duration-300 ${
+                menuOpen ? '-translate-y-[7px] -rotate-45' : ''
+              }`}
+            />
+          </button>
+
+          <div className="hidden items-center gap-10 md:flex">
+            <ul className="flex items-center gap-8">
+              {desktopNavLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={linkClass(link.href)}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/book"
+              className="rounded-none bg-[#C9A96E] px-6 py-2.5 font-sans-dm text-xs uppercase tracking-[0.25em] text-[#0A0A0A] transition-all duration-300 hover:bg-transparent hover:text-[#C9A96E] hover:outline hover:outline-1 hover:outline-[#C9A96E]"
+            >
+              Book Now
+            </Link>
           </div>
-        </div>
-      )}
-    </header>
+        </nav>
+      </header>
+
+      {mobileMenu}
+    </>
   );
 }
