@@ -13,7 +13,7 @@ export default function CursorGlow() {
 
   return (
     <div
-      className="pointer-events-none fixed z-[9999] hidden md:block"
+      className="pointer-events-none isolate fixed z-[9999] hidden transform-gpu backface-hidden will-change-transform md:block"
       style={{
         left: pos.x - 150,
         top: pos.y - 150,

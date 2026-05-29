@@ -2,7 +2,6 @@ const marqueeItems = [
   'LASH EXTENSIONS',
   'BROW LAMINATION',
   'WAXING',
-  'LASH LIFT',
   'BROW TINT',
   'FACIALS',
   'HAPEVILLE GA',

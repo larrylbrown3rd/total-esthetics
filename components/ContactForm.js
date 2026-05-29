@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { serviceSelectOptions } from '@/lib/data';
 
 function isValidEmail(email) {
   return email.includes('@') && email.includes('.');
@@ -12,13 +11,11 @@ export default function ContactForm({ submitLabel = 'Request Appointment' }) {
   const [fields, setFields] = useState({
     name: '',
     email: '',
-    service: '',
     message: '',
   });
   const [errors, setErrors] = useState({
     name: false,
     email: false,
-    service: false,
     message: false,
   });
   const [showSuccess, setShowSuccess] = useState(false);
@@ -40,7 +37,6 @@ export default function ContactForm({ submitLabel = 'Request Appointment' }) {
     const newErrors = {
       name: fields.name.trim() === '',
       email: fields.email.trim() === '' || !isValidEmail(fields.email),
-      service: fields.service === '',
       message: fields.message.trim() === '',
     };
 
@@ -51,8 +47,8 @@ export default function ContactForm({ submitLabel = 'Request Appointment' }) {
     await new Promise((r) => setTimeout(r, 600));
     setSubmitting(false);
     setShowSuccess(true);
-    setFields({ name: '', email: '', service: '', message: '' });
-    setErrors({ name: false, email: false, service: false, message: false });
+    setFields({ name: '', email: '', message: '' });
+    setErrors({ name: false, email: false, message: false });
   };
 
   const inputClass = (hasError) =>
@@ -109,37 +105,6 @@ export default function ContactForm({ submitLabel = 'Request Appointment' }) {
               className="mt-2 font-sans-dm text-xs text-red-500"
             >
               Please enter a valid email address
-            </motion.p>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <div className="mb-8">
-        <label htmlFor="service" className="label mb-2 block">
-          Service
-        </label>
-        <select
-          id="service"
-          name="service"
-          value={fields.service}
-          onChange={handleChange}
-          className={`${inputClass(errors.service)} cursor-pointer`}
-        >
-          {serviceSelectOptions.map((option) => (
-            <option key={option.value} value={option.value} className="bg-card">
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <AnimatePresence>
-          {errors.service && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="mt-2 font-sans-dm text-xs text-red-500"
-            >
-              Please select a service
             </motion.p>
           )}
         </AnimatePresence>

@@ -4,7 +4,7 @@ import AboutHero from '@/components/AboutHero';
 export const metadata = {
   title: 'About | Total Esthetics Hapeville GA',
   description:
-    'Premier boutique esthetician studio serving Hapeville and greater South Atlanta. Luxury lash and advanced brow artistry.',
+    'Premier boutique esthetician studio serving Hapeville and the greater Atlanta Metropolitan area. Luxury lash and advanced brow artistry.',
   openGraph: {
     title: 'About | Total Esthetics',
     description: 'Meet your luxury lash and brow artist',

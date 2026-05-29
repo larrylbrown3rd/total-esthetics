@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PageHeader from '@/components/PageHeader';
 import {
   bookingAppointmentCategories,
   bookingPackageCategories,
@@ -9,8 +10,10 @@ import {
 
 function CategoryRow({ title, url, onSelect }) {
   return (
-    <div className="flex flex-col gap-4 border border-luxuryBorder/40 bg-deep px-5 py-5 transition-all duration-300 hover:border-gold/30 hover:bg-[#161616] sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-6">
-      <h3 className="font-cormorant text-xl font-light text-luxuryText">{title}</h3>
+    <div className="flex flex-col gap-4 border border-[#3D2B1F]/30 bg-[#111111] px-5 py-5 transition-all duration-500 ease-in-out hover:border-[#C9A96E]/20 sm:flex-row sm:items-center sm:justify-between sm:px-8 sm:py-6">
+      <h3 className="font-sans text-sm font-light uppercase tracking-[0.2em] text-[#F5F0E8] sm:text-base">
+        {title}
+      </h3>
       <button
         type="button"
         onClick={() => onSelect(url)}
@@ -37,14 +40,10 @@ export default function CategoryBooking() {
             transition={{ duration: 0.35, ease: 'easeOut' }}
             className="px-4 pb-16 pt-12 md:px-10"
           >
-            <header className="mb-12">
-              <span className="mb-2 block text-center font-sans-dm text-xs uppercase tracking-[0.3em] text-gold">
-                Book an Appointment
-              </span>
-              <h1 className="text-center font-cormorant text-3xl font-light uppercase tracking-wide text-luxuryText md:text-5xl">
-                Select Category
-              </h1>
-            </header>
+            <PageHeader
+              eyebrow="Book an Appointment"
+              title="Select Category"
+            />
 
             <div className="mx-auto w-full max-w-3xl space-y-10">
               <section>

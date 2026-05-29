@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{js,jsx}', './components/**/*.{js,jsx}'],
+  content: [
+    './app/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+    './lib/**/*.{js,jsx}',
+  ],
+  safelist: ['aspect-[3/4]', 'aspect-[1/1]', 'aspect-[9/16]'],
   theme: {
     extend: {
       colors: {
@@ -19,6 +24,7 @@ module.exports = {
         mink: '#3D2B1F',
       },
       fontFamily: {
+        sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
         cormorant: ['var(--font-cormorant)', 'serif'],
         'sans-dm': ['var(--font-dm-sans)', 'sans-serif'],
       },

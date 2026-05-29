@@ -32,7 +32,7 @@ export default function Logo({
   const s = sizes[size] || sizes.nav;
   const estheticsClass =
     contrast === 'high'
-      ? `${s.wordmark} font-cormorant font-light uppercase tracking-[0.2em] text-cream/85`
+      ? `${s.wordmark} font-cormorant font-normal uppercase tracking-[0.2em] text-cream`
       : `logo-esthetics ${s.wordmark}`;
   const taglineClass =
     contrast === 'high'

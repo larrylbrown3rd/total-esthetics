@@ -36,14 +36,17 @@ export default function HeroVideoBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div
+      className="absolute inset-0 z-0 overflow-hidden transform-gpu backface-hidden will-change-transform"
+      aria-hidden="true"
+    >
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transform-gpu backface-hidden will-change-transform"
         style={{ backgroundImage: `url('${heroBackground.image}')` }}
       />
       <video
         ref={videoRef}
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 motion-reduce:hidden ${
+        className={`absolute inset-0 h-full w-full object-cover transform-gpu backface-hidden will-change-transform transition-opacity duration-700 motion-reduce:hidden ${
           videoActive ? 'opacity-100' : 'opacity-0'
         }`}
         poster={heroBackground.image}

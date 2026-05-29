@@ -28,9 +28,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${cormorant.variable} ${dmSans.variable} font-sans-dm antialiased`}
+        className={`${cormorant.variable} ${dmSans.variable} font-sans-dm antialiased transform-gpu backface-hidden`}
       >
-        <div className="fixed top-0 z-[60] h-[2px] w-full bg-[#C9A96E]" aria-hidden="true" />
+        <div
+          className="fixed top-0 z-[60] h-[2px] w-full bg-[#C9A96E] transform-gpu backface-hidden will-change-transform"
+          aria-hidden="true"
+        />
         <CursorGlow />
         {children}
       </body>

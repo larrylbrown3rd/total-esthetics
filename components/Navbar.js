@@ -6,11 +6,16 @@ import { usePathname } from 'next/navigation';
 import { BRAND_TAGLINE_UPPER } from '@/lib/data';
 
 const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/gallery', label: 'Gallery' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
+  { href: '/policies', label: 'Policies' },
 ];
+
+/** Mobile overlay — no Services link (book via SMS / contact flow) */
+const mobileNavLinks = navLinks.filter((link) => link.href !== '/services');
 
 const totalGradientStyle = {
   background: 'linear-gradient(135deg, #B8860B, #C9A96E, #E8D5A3, #C9A96E, #B8860B)',
@@ -29,7 +34,7 @@ function NavLogo() {
         >
           TOTAL
         </span>
-        <span className="ml-1.5 font-cormorant text-lg font-light uppercase tracking-[0.15em] text-[#555555]">
+        <span className="ml-1.5 font-cormorant text-lg font-normal uppercase tracking-[0.15em] text-[#F5F0E8]/90">
           ESTHETICS
         </span>
       </div>
@@ -62,7 +67,10 @@ export default function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   const linkClass = (href) => {
-    const active = pathname === href || pathname.startsWith(`${href}/`);
+    const active =
+      href === '/'
+        ? pathname === '/'
+        : pathname === href || pathname.startsWith(`${href}/`);
     return `font-sans-dm text-xs font-medium uppercase tracking-[0.2em] transition-colors duration-300 ${
       active ? 'text-[#C9A96E]' : 'text-cream hover:text-[#E8D5A3]'
     }`;
@@ -70,7 +78,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-[2px] z-50 w-full transition-all duration-500 ${
+      className={`fixed top-[2px] z-50 w-full transform-gpu backface-hidden will-change-transform transition-all duration-500 ${
         scrolled
           ? 'border-b border-[#2C2C2C] bg-black/80 py-4 backdrop-blur-md md:px-10'
           : 'border-b border-transparent bg-transparent py-5 md:px-10'
@@ -123,13 +131,32 @@ export default function Navbar() {
       </nav>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-black-luxury/98 backdrop-blur-md md:hidden">
-          <ul className="flex flex-col items-center gap-10">
-            {navLinks.map((link) => (
+        <div className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-[#0A0A0A] px-6 pb-12 pt-24 transform-gpu backface-hidden will-change-transform md:hidden">
+          <Link
+            href="/"
+            onClick={closeMenu}
+            className="absolute left-6 top-6 z-20 font-sans text-xs font-light uppercase tracking-[0.3em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
+          >
+            HOME
+          </Link>
+          <button
+            type="button"
+            onClick={closeMenu}
+            aria-label="Close menu"
+            className="absolute right-6 top-6 z-20 font-sans text-xs font-light uppercase tracking-[0.3em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
+          >
+            CLOSE
+          </button>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none isolate absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#C9A96E]/5 blur-3xl transform-gpu backface-hidden will-change-transform"
+          />
+          <ul className="relative z-10 mx-auto flex w-full max-w-sm flex-col items-stretch gap-3">
+            {mobileNavLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="font-cormorant text-3xl font-light uppercase tracking-[0.2em] text-cream"
+                  className="block py-4 text-center font-sans text-xl font-light uppercase tracking-[0.25em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E] sm:text-2xl"
                   onClick={closeMenu}
                 >
                   {link.label}
@@ -139,10 +166,10 @@ export default function Navbar() {
             <li>
               <Link
                 href="/book"
-                className="rounded-none bg-[#C9A96E] px-10 py-4 font-sans-dm text-xs uppercase tracking-[0.25em] text-[#0A0A0A] transition-all duration-300 hover:bg-transparent hover:text-[#C9A96E] hover:outline hover:outline-1 hover:outline-[#C9A96E]"
+                className="mx-auto mt-6 block max-w-xs bg-[#C9A96E] px-8 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
                 onClick={closeMenu}
               >
-                Book Now
+                SECURE YOUR SESSION
               </Link>
             </li>
           </ul>

@@ -11,6 +11,7 @@ export default function InstagramGrid() {
         <a
           key={`ig-${item.id}`}
           href={SOCIAL.instagram}
+          aria-label={SOCIAL.instagramHandle}
           target="_blank"
           rel="noopener noreferrer"
           className="group relative aspect-square overflow-hidden border border-charcoal bg-card transition-colors hover:border-gold"

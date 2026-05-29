@@ -151,9 +151,9 @@ html {
 
 .logo-esthetics {
   font-family: var(--font-cormorant), serif;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.2em;
-  color: #2c2c2c;
+  color: rgba(245, 240, 232, 0.92);
   text-transform: uppercase;
   margin-left: 0.3em;
 }
