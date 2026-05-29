@@ -6,15 +6,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BRAND_TAGLINE_UPPER } from '@/lib/data';
 
-const mobileNavLinks = [
-  { href: '/', label: 'HOME' },
-  { href: '/services', label: 'SERVICES' },
-  { href: '/gallery', label: 'GALLERY' },
-  { href: '/about', label: 'ABOUT' },
-  { href: '/contact', label: 'CONTACT' },
-  { href: '/terms', label: 'POLICIES' },
-];
-
 const desktopNavLinks = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
@@ -90,7 +81,7 @@ export default function Navbar() {
     menuOpen && mounted
       ? createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex h-full w-full transform-gpu flex-col items-center justify-center bg-[#0A0A0A] md:hidden"
+            className="fixed inset-0 z-[99999] flex h-screen w-full transform-gpu flex-col items-center justify-center bg-[#0A0A0A] px-6 transition-all duration-300 ease-in-out md:hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
@@ -99,34 +90,65 @@ export default function Navbar() {
               type="button"
               aria-label="Close menu"
               onClick={() => setMenuOpen(false)}
-              className="absolute right-6 top-6 z-[10000] border border-[#3D2B1F]/40 bg-[#111111] p-3 text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
+              className="absolute right-6 top-6 border border-[#3D2B1F]/30 bg-[#111111] p-4 text-sm font-light tracking-widest text-[#F5F0E8]/70 transition-colors duration-300 hover:text-[#C9A96E]"
             >
               ✕
             </button>
 
-            <nav
-              aria-label="Site navigation"
-              className="flex w-full flex-col items-center justify-center space-y-8 px-6 text-center"
-            >
-              {mobileNavLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-sans text-lg font-light uppercase tracking-[0.2em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-
+            <div className="my-auto flex w-full flex-col items-center justify-center space-y-8 overflow-y-auto py-24 text-center">
               <Link
-                href="/book"
-                className="w-full max-w-xs bg-[#C9A96E] px-8 py-4 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
+                href="/"
                 onClick={() => setMenuOpen(false)}
+                className="block w-full py-1 font-sans text-lg font-light uppercase tracking-[0.25em] text-[#F5F0E8] transition-all duration-300 hover:text-[#C9A96E]"
               >
-                SECURE YOUR SESSION
+                Home
               </Link>
-            </nav>
+              <Link
+                href="/services"
+                onClick={() => setMenuOpen(false)}
+                className="block w-full py-1 font-sans text-lg font-light uppercase tracking-[0.25em] text-[#F5F0E8] transition-all duration-300 hover:text-[#C9A96E]"
+              >
+                Services
+              </Link>
+              <Link
+                href="/gallery"
+                onClick={() => setMenuOpen(false)}
+                className="block w-full py-1 font-sans text-lg font-light uppercase tracking-[0.25em] text-[#F5F0E8] transition-all duration-300 hover:text-[#C9A96E]"
+              >
+                Gallery
+              </Link>
+              <Link
+                href="/about"
+                onClick={() => setMenuOpen(false)}
+                className="block w-full py-1 font-sans text-lg font-light uppercase tracking-[0.25em] text-[#F5F0E8] transition-all duration-300 hover:text-[#C9A96E]"
+              >
+                About
+              </Link>
+              <Link
+                href="/contact"
+                onClick={() => setMenuOpen(false)}
+                className="block w-full py-1 font-sans text-lg font-light uppercase tracking-[0.25em] text-[#F5F0E8] transition-all duration-300 hover:text-[#C9A96E]"
+              >
+                Contact
+              </Link>
+              <Link
+                href="/terms"
+                onClick={() => setMenuOpen(false)}
+                className="block w-full py-1 font-sans text-lg font-light uppercase tracking-[0.25em] text-[#F5F0E8] transition-all duration-300 hover:text-[#C9A96E]"
+              >
+                Policies
+              </Link>
+
+              <div className="mx-auto w-full max-w-xs pt-6">
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="block bg-[#C9A96E] px-8 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
+                >
+                  SECURE YOUR SESSION
+                </Link>
+              </div>
+            </div>
           </div>,
           document.body
         )
