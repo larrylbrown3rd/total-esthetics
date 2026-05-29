@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BRAND_TAGLINE_UPPER } from '@/lib/data';
 
-const navLinks = [
+const mobileNavLinks = [
   { href: '/', label: 'HOME' },
   { href: '/services', label: 'SERVICES' },
   { href: '/gallery', label: 'GALLERY' },
@@ -76,8 +76,6 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const closeMenu = () => setMenuOpen(false);
-
   const linkClass = (href) => {
     const active =
       href === '/'
@@ -106,38 +104,29 @@ export default function Navbar() {
               ✕
             </button>
 
-            <nav aria-label="Site navigation" className="w-full max-w-sm px-6">
-              <ul className="flex flex-col items-center gap-1">
-                {navLinks.map((link) => (
-                  <li key={link.href} className="w-full">
-                    <Link
-                      href={link.href}
-                      className="block py-4 text-center font-sans text-lg font-light uppercase tracking-[0.2em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <nav
+              aria-label="Site navigation"
+              className="flex w-full flex-col items-center justify-center space-y-8 px-6 text-center"
+            >
+              {mobileNavLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="font-sans text-lg font-light uppercase tracking-[0.2em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
-            <div className="mt-8 w-full max-w-xs px-6">
               <Link
                 href="/book"
-                className="block bg-[#C9A96E] px-8 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
+                className="w-full max-w-xs bg-[#C9A96E] px-8 py-4 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
                 onClick={() => setMenuOpen(false)}
               >
                 SECURE YOUR SESSION
               </Link>
-              <Link
-                href="/services"
-                className="mt-4 block text-center font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F0E8]/80 transition-colors duration-300 hover:text-[#C9A96E]"
-                onClick={() => setMenuOpen(false)}
-              >
-                TOTAL PACKAGES
-              </Link>
-            </div>
+            </nav>
           </div>,
           document.body
         )
