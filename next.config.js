@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: {},
   devIndicators: false,
   // Polling + ignored paths reduce EMFILE watcher failures on macOS (dev 404s)
   webpack: (config, { dev }) => {
