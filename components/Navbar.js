@@ -4,8 +4,18 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BRAND_TAGLINE_UPPER } from '@/lib/data';
+import { heroBackground } from '@/lib/media';
 
 const navLinks = [
+  { href: '/', label: 'HOME' },
+  { href: '/services', label: 'SERVICES' },
+  { href: '/gallery', label: 'GALLERY' },
+  { href: '/about', label: 'ABOUT' },
+  { href: '/contact', label: 'CONTACT' },
+  { href: '/policies', label: 'POLICIES' },
+];
+
+const desktopNavLinks = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/gallery', label: 'Gallery' },
@@ -13,9 +23,6 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
   { href: '/policies', label: 'Policies' },
 ];
-
-/** Mobile overlay — no Services link (book via SMS / contact flow) */
-const mobileNavLinks = navLinks.filter((link) => link.href !== '/services');
 
 const totalGradientStyle = {
   background: 'linear-gradient(135deg, #B8860B, #C9A96E, #E8D5A3, #C9A96E, #B8860B)',
@@ -113,7 +120,7 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-10 md:flex">
           <ul className="flex items-center gap-8">
-            {navLinks.map((link) => (
+            {desktopNavLinks.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className={linkClass(link.href)}>
                   {link.label}
@@ -131,48 +138,56 @@ export default function Navbar() {
       </nav>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-[#0A0A0A] px-6 pb-12 pt-24 transform-gpu backface-hidden will-change-transform md:hidden">
-          <Link
-            href="/"
-            onClick={closeMenu}
-            className="absolute left-6 top-6 z-20 font-sans text-xs font-light uppercase tracking-[0.3em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
-          >
-            HOME
-          </Link>
-          <button
-            type="button"
-            onClick={closeMenu}
-            aria-label="Close menu"
-            className="absolute right-6 top-6 z-20 font-sans text-xs font-light uppercase tracking-[0.3em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E]"
-          >
-            CLOSE
-          </button>
+        <div
+          className="fixed inset-0 z-40 flex flex-col overflow-y-auto transform-gpu backface-hidden will-change-transform md:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+        >
           <div
             aria-hidden="true"
-            className="pointer-events-none isolate absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#C9A96E]/5 blur-3xl transform-gpu backface-hidden will-change-transform"
+            className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('${heroBackground.image}')` }}
           />
-          <ul className="relative z-10 mx-auto flex w-full max-w-sm flex-col items-stretch gap-3">
-            {mobileNavLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="block py-4 text-center font-sans text-xl font-light uppercase tracking-[0.25em] text-[#F5F0E8] transition-colors duration-300 hover:text-[#C9A96E] sm:text-2xl"
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-            <li>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[#0A0A0A]/58"
+          />
+
+          <div className="relative z-10 flex min-h-full flex-col items-center justify-center px-6 py-28">
+            <nav aria-label="Site navigation">
+              <ul className="space-y-4 text-center">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="block py-2 font-sans text-lg font-light uppercase tracking-[0.2em] text-[#F5F0E8]/90 transition-colors duration-300 hover:text-[#C9A96E]"
+                      onClick={closeMenu}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div className="mt-10 w-full max-w-xs">
               <Link
                 href="/book"
-                className="mx-auto mt-6 block max-w-xs bg-[#C9A96E] px-8 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
+                className="block bg-[#C9A96E] px-8 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
                 onClick={closeMenu}
               >
                 SECURE YOUR SESSION
               </Link>
-            </li>
-          </ul>
+              <Link
+                href="/services"
+                className="mt-4 block text-center font-sans text-[11px] uppercase tracking-[0.2em] text-[#F5F0E8]/80 transition-colors duration-300 hover:text-[#C9A96E]"
+                onClick={closeMenu}
+              >
+                Total Packages
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </header>

@@ -6,15 +6,6 @@ import HeroVideoBackground from './HeroVideoBackground';
 import { heroBackground } from '@/lib/media';
 import { BRAND_TAGLINE } from '@/lib/data';
 
-const mobileNavLinks = [
-  { href: '/', label: 'HOME' },
-  { href: '/services', label: 'SERVICES' },
-  { href: '/gallery', label: 'GALLERY' },
-  { href: '/about', label: 'ABOUT' },
-  { href: '/contact', label: 'CONTACT' },
-  { href: '/policies', label: 'POLICIES' },
-];
-
 export default function HomeHero() {
   return (
     <section
@@ -29,7 +20,7 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="flex w-full max-w-3xl flex-col items-center rounded-none bg-[#0A0A0A]/38 px-5 py-8 text-center backdrop-blur-[1px] md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-0"
+          className="flex w-full max-w-3xl flex-col items-center rounded-none px-5 py-8 text-center md:bg-transparent md:px-0 md:py-0"
         >
           <p className="font-cormorant text-[10px] font-light uppercase tracking-[0.32em] text-[#C9A96E] md:text-xs">
             HAPEVILLE, GEORGIA
@@ -43,22 +34,7 @@ export default function HomeHero() {
             Precision. <span className="italic">Beauty.</span> <br /> Confidence.
           </h1>
 
-          <nav className="py-8 md:hidden" aria-label="Hero navigation">
-            <ul className="space-y-4">
-              {mobileNavLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="block py-2 text-center font-sans text-lg font-light uppercase tracking-[0.2em] text-[#F5F0E8]/90"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="mt-4 w-full max-w-sm md:mt-8">
+          <div className="mt-8 hidden w-full max-w-sm md:mt-8 md:block">
             <Link
               href="/book"
               className="block bg-[#C9A96E] px-8 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#0A0A0A] transition-all duration-300 hover:bg-[#B8985D]"
