@@ -33,13 +33,13 @@ const nextConfig = {
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'totalesthetics.com' }],
-        destination: 'https://total-esthetics.com/:path*',
+        destination: 'https://www.total-esthetics.com/:path*',
         permanent: true,
       },
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'www.totalesthetics.com' }],
-        destination: 'https://total-esthetics.com/:path*',
+        destination: 'https://www.total-esthetics.com/:path*',
         permanent: true,
       },
     ];
