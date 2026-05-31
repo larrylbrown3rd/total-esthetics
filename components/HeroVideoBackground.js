@@ -3,72 +3,67 @@
 import { useEffect, useRef, useState } from 'react';
 import { heroBackground } from '@/lib/media';
 
+/** Instant static hero — mobile + first paint while desktop video mounts */
+function HeroStaticLayer({ className = '' }) {
+  return (
+    <div
+      className={`hero-cover-media bg-cover bg-center bg-no-repeat ${className}`}
+      style={{ backgroundImage: `url('${heroBackground.image}')` }}
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function HeroVideoBackground() {
   const videoRef = useRef(null);
-  const [showVideo, setShowVideo] = useState(true);
+  const [enableVideo, setEnableVideo] = useState(false);
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 768px)').matches;
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    setEnableVideo(desktop && !reduced);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !showVideo) return;
-
-    const prefersReduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-    if (prefersReduced) {
-      setShowVideo(false);
-      return;
-    }
+    if (!video || !enableVideo) return;
 
     let cancelled = false;
 
     const tryPlay = () => {
       if (cancelled || !video) return;
-      video.play().catch(() => {
-        /* iOS may defer autoplay until first touch — poster stays visible */
-      });
+      video.play().catch(() => {});
     };
 
-    const unlockOnTouch = () => tryPlay();
-
     video.addEventListener('canplay', tryPlay);
-    video.addEventListener('loadeddata', tryPlay);
-    video.addEventListener('error', () => setShowVideo(false));
+    video.addEventListener('error', () => setEnableVideo(false));
 
     const onVisibility = () => {
       if (document.visibilityState === 'visible') tryPlay();
     };
 
     document.addEventListener('visibilitychange', onVisibility);
-    window.addEventListener('pageshow', onVisibility);
-    document.addEventListener('touchstart', unlockOnTouch, {
-      once: true,
-      passive: true,
-    });
-
     tryPlay();
 
     return () => {
       cancelled = true;
       video.removeEventListener('canplay', tryPlay);
-      video.removeEventListener('loadeddata', tryPlay);
       document.removeEventListener('visibilitychange', onVisibility);
-      window.removeEventListener('pageshow', onVisibility);
     };
-  }, [showVideo]);
+  }, [enableVideo]);
 
   return (
     <div
       className="absolute inset-0 z-0 overflow-hidden bg-[#0A0A0A]"
       aria-hidden="true"
     >
-      <img
-        src={heroBackground.image}
-        alt=""
-        aria-hidden="true"
-        className="hero-cover-media"
-        fetchPriority="high"
-      />
-      {showVideo && (
+      {/* Mobile: static image only — no video download, no photo→video swap */}
+      {!enableVideo && <HeroStaticLayer />}
+
+      {/* Desktop: single video element; poster matches hero.jpg for seamless start */}
+      {enableVideo && (
         <video
           ref={videoRef}
           src={heroBackground.video}

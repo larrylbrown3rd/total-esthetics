@@ -1,6 +1,8 @@
+import { preload } from 'react-dom';
 import PageShell from '@/components/PageShell';
 import HomeHero from '@/components/HomeHero';
 import { SITE_URL } from '@/lib/data';
+import { heroBackground } from '@/lib/media';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -18,6 +20,8 @@ const structuredData = {
 };
 
 export default function HomePage() {
+  preload(heroBackground.image, { as: 'image', fetchPriority: 'high' });
+
   return (
     <PageShell flush>
       <script
