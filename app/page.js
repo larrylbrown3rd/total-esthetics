@@ -21,6 +21,7 @@ const structuredData = {
 
 export default function HomePage() {
   preload(heroBackground.image, { as: 'image', fetchPriority: 'high' });
+  preload(heroBackground.video, { as: 'fetch', fetchPriority: 'high' });
 
   return (
     <PageShell flush>

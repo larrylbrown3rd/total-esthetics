@@ -3,32 +3,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { heroBackground } from '@/lib/media';
 
-/** Instant static hero — mobile + first paint while desktop video mounts */
-function HeroStaticLayer({ className = '' }) {
-  return (
-    <div
-      className={`hero-cover-media bg-cover bg-center bg-no-repeat ${className}`}
-      style={{ backgroundImage: `url('${heroBackground.image}')` }}
-      aria-hidden="true"
-    />
-  );
-}
-
 export default function HeroVideoBackground() {
   const videoRef = useRef(null);
-  const [enableVideo, setEnableVideo] = useState(false);
-
-  useEffect(() => {
-    const desktop = window.matchMedia('(min-width: 768px)').matches;
-    const reduced = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-    setEnableVideo(desktop && !reduced);
-  }, []);
+  const [showVideo, setShowVideo] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !enableVideo) return;
+    if (!video || !showVideo) return;
+
+    const prefersReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    if (prefersReduced) {
+      setShowVideo(false);
+      return;
+    }
 
     let cancelled = false;
 
@@ -37,38 +26,44 @@ export default function HeroVideoBackground() {
       video.play().catch(() => {});
     };
 
+    const unlockOnTouch = () => tryPlay();
+
     video.addEventListener('canplay', tryPlay);
-    video.addEventListener('error', () => setEnableVideo(false));
+    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('error', () => setShowVideo(false));
 
     const onVisibility = () => {
       if (document.visibilityState === 'visible') tryPlay();
     };
 
     document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('pageshow', onVisibility);
+    document.addEventListener('touchstart', unlockOnTouch, {
+      once: true,
+      passive: true,
+    });
+
     tryPlay();
 
     return () => {
       cancelled = true;
       video.removeEventListener('canplay', tryPlay);
+      video.removeEventListener('loadeddata', tryPlay);
       document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pageshow', onVisibility);
     };
-  }, [enableVideo]);
+  }, [showVideo]);
 
   return (
     <div
       className="absolute inset-0 z-0 overflow-hidden bg-[#0A0A0A]"
       aria-hidden="true"
     >
-      {/* Mobile: static image only — no video download, no photo→video swap */}
-      {!enableVideo && <HeroStaticLayer />}
-
-      {/* Desktop: single video element; poster matches hero.jpg for seamless start */}
-      {enableVideo && (
+      {showVideo ? (
         <video
           ref={videoRef}
           src={heroBackground.video}
           className="hero-cover-media"
-          poster={heroBackground.image}
           muted
           loop
           playsInline
@@ -76,6 +71,11 @@ export default function HeroVideoBackground() {
           preload="auto"
           disablePictureInPicture
           disableRemotePlayback
+        />
+      ) : (
+        <div
+          className="hero-cover-media bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url('${heroBackground.image}')` }}
         />
       )}
     </div>
