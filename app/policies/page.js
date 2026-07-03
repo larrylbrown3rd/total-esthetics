@@ -37,10 +37,9 @@ export default function PoliciesPage() {
           />
 
           <p className="mx-auto mb-14 max-w-3xl text-center font-sans-dm text-sm font-light leading-relaxed text-[#F5F0E8]/70 sm:text-base">
-            These policies govern every reservation at Total Esthetics. By
-            booking, you agree to the standards outlined below — crafted to
-            protect your time, our artistry, and the integrity of the studio
-            experience.
+            By booking an appointment, you agree and acknowledge the policies
+            outlined below — crafted to protect your time, our artistry, and the
+            integrity of the studio experience.
           </p>
 
           <div className="grid grid-cols-1 gap-8 lg:gap-10">
@@ -54,34 +53,39 @@ export default function PoliciesPage() {
                 </h2>
 
                 <div className="space-y-5 font-sans-dm text-sm font-light leading-relaxed text-[#F5F0E8]/70 sm:text-base">
-                  {section.paragraphs.map((paragraph, index) => (
-                    <p key={`${section.number}-p-${index}`}>{paragraph}</p>
-                  ))}
-
-                  {section.concierge && (
-                    <p>
-                      <span className="text-[#F5F0E8]/90">
-                        After-Hours Concierge:
-                      </span>{' '}
-                      For bespoke requests outside standard studio hours, text{' '}
-                      <a
-                        href={`sms:${AFTER_HOURS_PHONE_RAW}`}
-                        className="text-[#C9A96E] transition-colors hover:text-[#F5F0E8]"
-                      >
-                        {AFTER_HOURS_PHONE_DISPLAY}
-                      </a>
-                      . Please allow up to twelve (12) hours for a response.
-                      Additional fees apply. Follow{' '}
-                      <a
-                        href={AFTER_HOURS_INSTAGRAM_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#C9A96E] transition-colors hover:text-[#F5F0E8]"
-                      >
-                        {AFTER_HOURS_INSTAGRAM_HANDLE}
-                      </a>{' '}
-                      on Instagram for studio updates.
-                    </p>
+                  {section.afterHours ? (
+                    <>
+                      <p>
+                        For appointment requests outside of standard studio
+                        hours, please text{' '}
+                        <a
+                          href={`sms:${AFTER_HOURS_PHONE_RAW}`}
+                          className="text-[#C9A96E] transition-colors hover:text-[#F5F0E8]"
+                        >
+                          {AFTER_HOURS_PHONE_DISPLAY}
+                        </a>
+                        . Kindly allow up to 12 hours for a response.
+                        After-hours appointments are subject to availability and
+                        an additional concierge fee.
+                      </p>
+                      <p>
+                        Stay connected by following{' '}
+                        <a
+                          href={AFTER_HOURS_INSTAGRAM_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#C9A96E] transition-colors hover:text-[#F5F0E8]"
+                        >
+                          {AFTER_HOURS_INSTAGRAM_HANDLE}
+                        </a>{' '}
+                        on Instagram for studio announcements, availability
+                        updates, and the latest work.
+                      </p>
+                    </>
+                  ) : (
+                    section.paragraphs.map((paragraph, index) => (
+                      <p key={`${section.number}-p-${index}`}>{paragraph}</p>
+                    ))
                   )}
                 </div>
               </article>

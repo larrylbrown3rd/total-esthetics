@@ -4,18 +4,22 @@ import { BRAND_TAGLINE } from '@/lib/data';
 const studioCommitments = [
   {
     title: '01 / The Protected Hour',
-    label: 'ONE-ON-ONE CONCIERGE',
-    body: 'We operate with a strict zero-overlap booking policy. When you are in our chair, the studio doors are locked to the public, ensuring your time is entirely respected, private, and unhurried.',
+    body: [
+      'We aim to operate under a zero-overlap booking policy, meaning each appointment is intentionally structured so your time in our care remains uninterrupted. During your service, the studio is secured exclusively for you, allowing for a fully private, unhurried, and focused experience.',
+    ],
   },
   {
-    title: '02 / The Acoustic Luxury',
-    label: 'A SILENT ESCAPE',
-    body: 'We have completely decoupled from the gossip, chaotic background noise, and ringing phones of commercial salons. Enjoy a curated, minimalist sonic environment designed for decompression.',
+    title: '02 / Studio Atmosphere & Experience Design',
+    body: [
+      'We are fully decoupled from the noise of commercial salon culture—no gossip, no distractions, and no ringing phones. In its place, we provide a thoughtfully designed environment intended to support presence, relaxation, and restorative calm.',
+    ],
   },
   {
-    title: '03 / The Health-First Metric',
-    label: 'INTEGRITY OF THE CANVAS',
-    body: 'High-fashion impact should never cost you your natural health. We vet and utilize only premier, clinical-grade adhesives and laminations that preserve lash and brow follicle health long-term.',
+    title: '03 / The Standard',
+    body: [
+      'High-fashion results should never come at the expense of your natural lash or brow health. At Total Esthetics, we exclusively utilize vetted, premier, clinical-grade adhesives and lamination systems selected for their performance, safety profile, and long-term compatibility with the natural follicle.',
+      'Our commitment is to enhance beauty while preserving the integrity, strength, and health of your natural lashes and brows over time.',
+    ],
   },
 ];
 
@@ -95,15 +99,14 @@ export default function AboutHero() {
                       : ''
                   }`}
                 >
-                  <h3 className="mb-3 font-cormorant text-2xl font-light leading-snug text-[#C9A96E] sm:text-3xl">
+                  <h3 className="mb-4 font-cormorant text-2xl font-light leading-snug text-[#C9A96E] sm:text-3xl">
                     {item.title}
                   </h3>
-                  <p className="mb-4 font-sans-dm text-[10px] font-medium uppercase tracking-[0.25em] text-[#F5F0E8]/50 sm:text-xs">
-                    {item.label}
-                  </p>
-                  <p className="font-sans-dm text-sm font-light leading-relaxed text-[#F5F0E8]/70">
-                    {item.body}
-                  </p>
+                  <div className="space-y-4 font-sans-dm text-sm font-light leading-relaxed text-[#F5F0E8]/70">
+                    {item.body.map((paragraph) => (
+                      <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
